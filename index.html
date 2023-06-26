@@ -4,138 +4,96 @@
   <title>Generador de Wallet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-   body {
-  font-family: 'Roboto', Arial, sans-serif;
-  background-color: #222;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+    }
 
-.container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  transition: opacity 0.5s;
-}
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
 
-h1 {
-  color: #fff;
-  margin-bottom: 30px;
-  font-size: 28px;
-}
+    h1 {
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
 
-p {
-  color: #ccc;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
+    p {
+      color: #ccc;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    button:hover {
+      background-color: #0056b3;
+    }
 
-input[type="text"] {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
+    input[type="text"] {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
 
-.copy-icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-left: 5px;
-  cursor: pointer;
-  vertical-align: middle;
-  background: url(copy_icon.png) no-repeat center center;
-  background-size: cover;
-  opacity: 0.6;
-  transition: opacity 0.5s;
-}
+    .copy-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+      cursor: pointer;
+      vertical-align: middle;
+      background: url(copy_icon.png) no-repeat center center;
+      background-size: cover;
+      opacity: 0.6;
+    }
 
-.copy-icon:hover {
-  opacity: 1;
-}
+    .wallet-logos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+    }
 
-.wallet-logos {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 20px;
-}
+    .wallet-logo {
+      width: 50px;
+      height: 50px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      cursor: pointer;
+    }
 
-.wallet-logo {
-  width: 50px;
-  height: 50px;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-  cursor: pointer;
-}
+    .wallet-logo:hover {
+      opacity: 1;
+    }
 
-.wallet-logo:hover {
-  opacity: 1;
-}
-
-.countdown {
-  color: #fff;
-  margin-top: 10px;
-  font-size: 18px;
-  transition: opacity 0.5s;
-}
-
-/* Animaciones */
-.fade-in {
-  opacity: 0;
-}
-
-.fade-in.visible {
-  opacity: 1;
-}
-
-.slide-up {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.slide-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.slide-down {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-.slide-down.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+    .countdown {
+      color: #fff;
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
@@ -209,15 +167,6 @@ input[type="text"] {
     function openWallet(url) {
       window.open(url, '_blank');
     }
-
-    // Animaciones al cargar la página
-    window.onload = function () {
-      const container = document.querySelector('.container');
-      const countdownElement = document.getElementById('countdown');
-
-      container.classList.add('fade-in', 'visible');
-      countdownElement.classList.add('slide-up', 'visible');
-    };
   </script>
 </head>
 <body>
@@ -233,7 +182,7 @@ input[type="text"] {
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://metamask.io/')">
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmRB8KKPZFdQPZhrBXbAXGqKve7TuFLTWVxjpPca6mrpxt?_gl=1*125itwa*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk1OTcuNjAuMC4w" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://trustwallet.com/')">
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/Qmc1ry24hGZ526EfC8cta43GQu8iAgH5Xro8RKSYptzeek?_gl=1*sq7gst*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.tronlink.org/')">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNi4wLjA" alt="Atomic Wallet" title="Atomic Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://atomicwallet.io/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNjAuMC4w" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.roninwallet.com/')">
     </div>
 
     <p class="countdown" id="countdown"></p>
