@@ -17,6 +17,7 @@
       background-color: rgba(0, 0, 0, 0.8);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       text-align: center;
+      transition: opacity 0.5s;
     }
 
     h1 {
@@ -68,6 +69,11 @@
       background: url(copy_icon.png) no-repeat center center;
       background-size: cover;
       opacity: 0.6;
+      transition: opacity 0.5s;
+    }
+
+    .copy-icon:hover {
+      opacity: 1;
     }
 
     .wallet-logos {
@@ -93,6 +99,36 @@
       color: #fff;
       margin-top: 10px;
       font-size: 18px;
+      transition: opacity 0.5s;
+    }
+
+    /* Animaciones */
+    .fade-in {
+      opacity: 0;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+    }
+
+    .slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-down {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    .slide-down.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
@@ -167,6 +203,15 @@
     function openWallet(url) {
       window.open(url, '_blank');
     }
+
+    // Animaciones al cargar la página
+    window.onload = function () {
+      const container = document.querySelector('.container');
+      const countdownElement = document.getElementById('countdown');
+
+      container.classList.add('fade-in', 'visible');
+      countdownElement.classList.add('slide-up', 'visible');
+    };
   </script>
 </head>
 <body>
@@ -182,7 +227,7 @@
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://metamask.io/')">
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmRB8KKPZFdQPZhrBXbAXGqKve7TuFLTWVxjpPca6mrpxt?_gl=1*125itwa*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk1OTcuNjAuMC4w" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://trustwallet.com/')">
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/Qmc1ry24hGZ526EfC8cta43GQu8iAgH5Xro8RKSYptzeek?_gl=1*sq7gst*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.tronlink.org/')">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNjAuMC4w" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.roninwallet.com/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNi4wLjA" alt="Atomic Wallet" title="Atomic Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://atomicwallet.io/')">
     </div>
 
     <p class="countdown" id="countdown"></p>
