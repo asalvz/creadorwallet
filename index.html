@@ -14,7 +14,7 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(to bottom right, #6A5ACD, #4B0082);
+  background: linear-gradient(to bottom right, #FF8C00, #FF4500);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   text-align: center;
   position: relative;
@@ -32,20 +32,21 @@
   background-position: center;
   border-radius: 10px;
   z-index: -1;
-  animation: scale 1s linear infinite;
+  animation: glow 4s linear infinite;
 }
 
-@keyframes scale {
+@keyframes glow {
   0% {
-    transform: scale(1);
+    background-position: top left;
   }
   50% {
-    transform: scale(1.2);
+    background-position: bottom right;
   }
   100% {
-    transform: scale(1);
+    background-position: top left;
   }
 }
+
 
 
     h1 {
