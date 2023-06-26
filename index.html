@@ -10,11 +10,11 @@
       color: #fff;
     }
 
-   .container {
+  .container {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(to bottom right, #FF8C00, #FF4500);
+  background: linear-gradient(to bottom right, #6A5ACD, #4B0082);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   text-align: center;
   position: relative;
@@ -32,18 +32,18 @@
   background-position: center;
   border-radius: 10px;
   z-index: -1;
-  animation: glow 2s linear infinite;
+  animation: scale 1s linear infinite;
 }
 
-@keyframes glow {
+@keyframes scale {
   0% {
-    background-position: top left;
+    transform: scale(1);
   }
   50% {
-    background-position: bottom right;
+    transform: scale(1.2);
   }
   100% {
-    background-position: top left;
+    transform: scale(1);
   }
 }
 
