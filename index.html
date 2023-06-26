@@ -10,43 +10,34 @@
       color: #fff;
     }
 
-  .container {
+ .container {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(to bottom right, #FF8C00, #FF4500);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
 .container::before {
   content: "";
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
-  background-size: 200% 200%;
-  background-position: center;
-  border-radius: 10px;
-  z-index: -1;
-  animation: glow 4s linear infinite;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background-image: linear-gradient(45deg, #4B0082, #6A5ACD, #4B0082);
+  transform: rotate(-45deg);
+  animation: scale 4s ease-in-out infinite;
 }
 
-@keyframes glow {
-  0% {
-    background-position: top left;
+@keyframes scale {
+  0%, 100% {
+    transform: rotate(-45deg) scale(0);
   }
   50% {
-    background-position: bottom right;
-  }
-  100% {
-    background-position: top left;
+    transform: rotate(-45deg) scale(1);
   }
 }
-
 
 
     h1 {
