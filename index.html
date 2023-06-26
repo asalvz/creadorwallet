@@ -4,132 +4,138 @@
   <title>Generador de Wallet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background-color: #222;
-      color: #fff;
-    }
+   body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #222;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
 
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      transition: opacity 0.5s;
-    }
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: opacity 0.5s;
+}
 
-    h1 {
-      color: #fff;
-      margin-bottom: 30px;
-      font-size: 28px;
-    }
+h1 {
+  color: #fff;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
 
-    p {
-      color: #ccc;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
+p {
+  color: #ccc;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
 
-    button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s;
-    }
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
 
-    button:hover {
-      background-color: #0056b3;
-    }
+button:hover {
+  background-color: #0056b3;
+}
 
-    input[type="text"] {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
+input[type="text"] {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
 
-    .copy-icon {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-left: 5px;
-      cursor: pointer;
-      vertical-align: middle;
-      background: url(copy_icon.png) no-repeat center center;
-      background-size: cover;
-      opacity: 0.6;
-      transition: opacity 0.5s;
-    }
+.copy-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+  cursor: pointer;
+  vertical-align: middle;
+  background: url(copy_icon.png) no-repeat center center;
+  background-size: cover;
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
 
-    .copy-icon:hover {
-      opacity: 1;
-    }
+.copy-icon:hover {
+  opacity: 1;
+}
 
-    .wallet-logos {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-top: 20px;
-    }
+.wallet-logos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
 
-    .wallet-logo {
-      width: 50px;
-      height: 50px;
-      opacity: 0.7;
-      transition: opacity 0.3s;
-      cursor: pointer;
-    }
+.wallet-logo {
+  width: 50px;
+  height: 50px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
 
-    .wallet-logo:hover {
-      opacity: 1;
-    }
+.wallet-logo:hover {
+  opacity: 1;
+}
 
-    .countdown {
-      color: #fff;
-      margin-top: 10px;
-      font-size: 18px;
-      transition: opacity 0.5s;
-    }
+.countdown {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 18px;
+  transition: opacity 0.5s;
+}
 
-    /* Animaciones */
-    .fade-in {
-      opacity: 0;
-    }
+/* Animaciones */
+.fade-in {
+  opacity: 0;
+}
 
-    .fade-in.visible {
-      opacity: 1;
-    }
+.fade-in.visible {
+  opacity: 1;
+}
 
-    .slide-up {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+.slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
 
-    .slide-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .slide-down {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
+.slide-down {
+  opacity: 0;
+  transform: translateY(-20px);
+}
 
-    .slide-down.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.slide-down.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
