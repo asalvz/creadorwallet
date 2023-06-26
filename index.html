@@ -44,7 +44,7 @@
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
     function generateWallet() {
-      const mnemonic = ethers.Wallet.createRandom().mnemonic;
+      const mnemonic = ethers.Wallet.createRandom().mnemonic.phrase;
       const wallet = ethers.Wallet.fromMnemonic(mnemonic);
 
       const address = wallet.address;
