@@ -10,14 +10,43 @@
       color: #fff;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
+   .container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(to bottom right, #FF8C00, #FF4500);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
+  background-size: 200% 200%;
+  background-position: center;
+  border-radius: 10px;
+  z-index: -1;
+  animation: glow 2s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    background-position: top left;
+  }
+  50% {
+    background-position: bottom right;
+  }
+  100% {
+    background-position: top left;
+  }
+}
+
 
     h1 {
       color: #fff;
