@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Generador de Wallet</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: 'Roboto', Arial, sans-serif;
@@ -82,6 +82,7 @@
       height: 50px;
       opacity: 0.7;
       transition: opacity 0.3s;
+      cursor: pointer;
     }
 
     .wallet-logo:hover {
@@ -162,6 +163,10 @@
         copyIcon.style.opacity = 0.6;
       }, 1000);
     }
+
+    function openWallet(url) {
+      window.open(url, '_blank');
+    }
   </script>
 </head>
 <body>
@@ -174,10 +179,10 @@
     <input id="addressField" type="text" readonly>
 
     <div class="wallet-logos">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmRB8KKPZFdQPZhrBXbAXGqKve7TuFLTWVxjpPca6mrpxt?_gl=1*125itwa*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk1OTcuNjAuMC4w" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/Qmc1ry24hGZ526EfC8cta43GQu8iAgH5Xro8RKSYptzeek?_gl=1*sq7gst*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
-      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNjAuMC4w" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias.">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://metamask.io/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmRB8KKPZFdQPZhrBXbAXGqKve7TuFLTWVxjpPca6mrpxt?_gl=1*125itwa*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk1OTcuNjAuMC4w" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://trustwallet.com/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/Qmc1ry24hGZ526EfC8cta43GQu8iAgH5Xro8RKSYptzeek?_gl=1*sq7gst*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.tronlink.org/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNjAuMC4w" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.roninwallet.com/')">
     </div>
 
     <p class="countdown" id="countdown"></p>
