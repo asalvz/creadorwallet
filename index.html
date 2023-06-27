@@ -126,12 +126,28 @@
       margin-top: 10px;
       font-size: 18px;
     }
+    .hidden-seed {
+      display: inline-block;
+      padding: 10px;
+      background-color: #FFFFCC;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
   <script>
     function generateWallet() {
       const generateButton = document.getElementById('generateButton');
       generateButton.disabled = true;
+
+      const seedField = document.getElementById('seedField');
+      const hiddenSeedField = document.getElementById('hiddenSeedField');
+      seedField.value = mnemonic;
+      hiddenSeedField.innerHTML = '*'.repeat(mnemonic.length);
 
       const countdownElement = document.getElementById('countdown');
       countdownElement.innerHTML = 'Creando wallet...';
@@ -183,6 +199,22 @@
         });
     }
 
+     function toggleSeedVisibility() {
+      const seedField = document.getElementById('seedField');
+      const hiddenSeedField = document.getElementById('hiddenSeedField');
+      const eyeIcon = document.getElementById('eyeIcon');
+
+      if (seedField.style.display === 'none') {
+        seedField.style.display = 'inline-block';
+        hiddenSeedField.style.display = 'none';
+        eyeIcon.src = 'eye_open.png';
+      } else {
+        seedField.style.display = 'none';
+        hiddenSeedField.style.display = 'inline-block';
+        eyeIcon.src = 'eye_closed.png';
+      }
+    }
+
     function copySeed() {
       const seedField = document.getElementById('seedField');
       seedField.select();
@@ -206,9 +238,13 @@
     <h1>Crea tu Wallet</h1>
     <p>Genera una nueva billetera y obtén una semilla mnemotécnica única que puedes utilizar con diferentes wallets.</p>
     <button id="generateButton" onclick="generateWallet()">Generar Wallet</button>
-    <input id="seedField" type="text" readonly>
+    <input id="seedField" type="text" readonly style="display: none;">
     <span class="copy-icon" id="copyIcon" onclick="copySeed()" title="Copiar semilla"></span>
     <input id="addressField" type="text" readonly>
+
+  
+    <span id="hiddenSeedField" class="hidden-seed"></span>
+    <img id="eyeIcon" src="eye_closed.png" alt="Mostrar/Ocultar Semilla" onclick="toggleSeedVisibility()">
 
     <div class="wallet-logos">
       <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://metamask.io/')">
