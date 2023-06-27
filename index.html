@@ -170,7 +170,7 @@
   }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
- <script>
+<script>
   function generateWallet() {
     const generateButton = document.getElementById('generateButton');
     generateButton.disabled = true;
@@ -253,10 +253,11 @@
   function openWallet(url) {
     window.open(url, '_blank');
   }
-    // Cerrar el popup al hacer clic fuera del contenido
-  const popupOverlay = document.querySelector('.popup-overlay');
-  popupOverlay.addEventListener('click', (event) => {
-    if (event.target === popupOverlay) {
+
+  // Cerrar el popup al hacer clic fuera del contenido
+  window.addEventListener('click', (event) => {
+    const popupOverlay = document.querySelector('.popup-overlay');
+    if (!popupOverlay.contains(event.target)) {
       popupOverlay.style.display = 'none';
     }
   });
