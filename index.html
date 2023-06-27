@@ -168,6 +168,20 @@
       transform: scale(1);
     }
   }
+     .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: transparent;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #ccc;
+    }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
 <script>
@@ -254,13 +268,11 @@
     window.open(url, '_blank');
   }
 
-  // Cerrar el popup al hacer clic fuera del contenido
-  window.addEventListener('click', (event) => {
-    const popupOverlay = document.querySelector('.popup-overlay');
-    if (!popupOverlay.contains(event.target)) {
+ 
+   function closePopup() {
+      const popupOverlay = document.querySelector('.popup-overlay');
       popupOverlay.style.display = 'none';
     }
-  });
 </script>
 
 </head>
@@ -309,6 +321,7 @@
   <div class="popup-content">
     <h3>Sabías que MultiCoin utiliza Inteligencia Artificial para crear tu wallet?</h3>
     <p>Te explicamos cómo hacemos que tu cartera de fondos permita transacciones en todo tipo de redes de manera optimizada y, lo más importante, garantizando la seguridad de tus criptomonedas frente a ataques de contratos maliciosos o dApps malintencionadas. Con MultiCoin, tus criptos están seguras.</p>
+  <button class="close-button" onclick="closePopup()">Cerrar</button>
   </div>
 </div>
 
