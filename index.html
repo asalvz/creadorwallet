@@ -182,6 +182,75 @@
     .close-button:hover {
       color: #ccc;
     }
+    .card {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .button.red {
+      background-color: #ff0000;
+    }
+
+    .button.green {
+      background-color: #00ff00;
+    }
+
+    .button.blue {
+      background-color: #0000ff;
+    }
+
+    .button.yellow {
+      background-color: #ffff00;
+    }
+
+    .stats {
+      text-align: center;
+    }
+
+    /* Animación de parpadeo */
+    .button.blink {
+      animation: blink-animation 0.8s infinite;
+    }
+
+    @keyframes blink-animation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   </style>
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
 <script>
@@ -331,6 +400,41 @@
   <button class="close-button" onclick="closePopup()">Cerrar</button>
   </div>
 </div>
+     <div id="tarjeta1" class="card">
+    <div class="header">Estado de los Nodos</div>
+    <div class="button-container">
+      <div class="button red"></div>
+      <div class="button green"></div>
+      <div class="button blue"></div>
+      <div class="button yellow"></div>
+    </div>
+    <div class="stats">
+      <p>Estadísticas de nodos:</p>
+      <p>Dato 1: 100</p>
+      <p>Dato 2: 50</p>
+      <p>Dato 3: 75</p>
+    </div>
+  </div>
+  <div id="tarjeta2" class="card">
+    <div class="header">Otra Tarjeta</div>
+    <div class="button-container">
+      <div class="button red"></div>
+      <div class="button green"></div>
+      <div class="button blue"></div>
+      <div class="button yellow"></div>
+    </div>
+    <div class="stats">
+      <p>Estadísticas:</p>
+      <p>Dato A: 200</p>
+      <p>Dato B: 30</p>
+      <p>Dato C: 50</p>
+    </div>
+  </div>
+  <!-- Contenido central de la página -->
+  <div style="margin-left: 20px;">
+    <h1>Título de la página</h1>
+    <p>Contenido central...</p>
+  </div>
 
     
 
